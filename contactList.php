@@ -76,3 +76,49 @@ class Contact
         
     }
 }
+/**
+ * Contact informations about companies
+ */
+class CompanyContact extends Contact
+{
+    protected $address;
+    public function getAddress()
+    {
+        return $this->address;
+    }
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+    public function __construct($name, $email, $address)
+    {
+        parent::__construct($name, $email);
+        $this->setAddress($address);
+    }
+    /**
+     * Parent methode displayContact / override 
+     * @return void
+     */
+    public function displayContact()
+    {
+        echo "COMPANY CONTACT INFORMATION<br>";
+        parent::displayContact();
+        echo "Address: " . $this->getAddress() . "<br>";
+        echo "<hr>";
+    }
+    /**
+     * Parent methode searchWithKeyword / override
+     * @param mixed $keyword
+     * @return void
+     */
+    public function searchWithKeyword($keyword)
+    {
+        
+        parent::searchWithKeyword($keyword);
+        if (stripos($this->getAddress(), $keyword) !== false) {
+            echo "Keyword exist in contact address!<br>";
+            echo $this->getAddress() . " (Contact name: ". $this->getName(). ")<br>";
+            echo "<hr>";
+        }
+    }
+}
