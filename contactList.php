@@ -29,16 +29,22 @@ class Contact
     {
         return $this->name;
     }
-    public function setName($name)
+    public function setName(string $name)
     {
+        if (trim($name) === "") {
+            die("Name field can't be empty.");
+        }
         $this->name = $name;
     }
     public function getEmail()
     {
         return $this->email;
     }
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            die("Email is not valid.");
+        }
         $this->email = $email;
     }
     public function __construct($name, $email)
@@ -81,13 +87,16 @@ class Contact
  */
 class CompanyContact extends Contact
 {
-    protected $address;
+    protected string $address;
     public function getAddress()
     {
         return $this->address;
     }
     public function setAddress($address)
     {
+        if (trim($address) === "") {
+            die("Address field can't be empty.");
+        }
         $this->address = $address;
     }
     public function __construct($name, $email, $address)
@@ -127,13 +136,16 @@ class CompanyContact extends Contact
  */
 class PersonContact extends Contact
 {
-    protected $phoneNumber;
+    protected string $phoneNumber;
     public function getPhoneNumber()
     {
         return $this->phoneNumber;
     }
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(string $phoneNumber)
     {
+        if (trim($phoneNumber) === "") {
+            die("Phone number field can't be empty.");
+        }
         $this->phoneNumber = $phoneNumber;
     }
     /**
