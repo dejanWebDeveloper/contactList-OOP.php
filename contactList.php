@@ -122,3 +122,54 @@ class CompanyContact extends Contact
         }
     }
 }
+/**
+ * Contact informations about some person
+ */
+class PersonContact extends Contact
+{
+    protected $phoneNumber;
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+    /**
+     * Built-in methode for construct objects
+     * @param string $name
+     * @param string $email
+     * @param mixed $phoneNumber
+     */
+    public function __construct($name, $email, $phoneNumber)
+    {
+        parent::__construct($name, $email);
+        $this->setPhoneNumber($phoneNumber);
+    }
+    /**
+     * Parent methode displayContact / override
+     * @return void
+     */
+    public function displayContact()
+    {
+        echo "PERSON CONTACT INFORMATION<br>";
+        parent::displayContact();
+        echo "Phone: " . $this->getPhoneNumber() . "<br>";
+        echo "<hr>";
+    }
+    /**
+     * Parent methode searchWithKeyword / override
+     * @param mixed $keyword
+     * @return void
+     */
+    public function searchWithKeyword($keyword)
+    {
+        parent::searchWithKeyword($keyword);
+        if (stripos($this->getPhoneNumber(), $keyword) !== false) {
+            echo "Keyword exist in contact phone number!<br>";
+            echo $this->getPhoneNumber() . " (Contact name: ". $this->getName(). ")<br>";
+            echo "<hr>";
+        }
+    }
+}
