@@ -237,3 +237,22 @@ class ContactList extends Contact
         }
     }
 }
+$companyContact01 = new CompanyContact("Developer", "dev@gmail.com", "Web Design 3");
+$companyContact02 = new CompanyContact("Science", "science@gmail.com", "Program 3");
+$companyContact03 = new CompanyContact("Routines", "routines@gmail.com", "Developer 3");
+$personContact01 = new PersonContact("Jovan Jovic", "jovan@gmail.com", "066586936");
+$personContact02 = new PersonContact("Oliver Nedeljkovic", "oliver@gmail.com", "066554888");
+$personContact03 = new PersonContact("Mitar Miric", "mitar@gmail.com", "066155445");
+
+$contactList = new ContactList();
+$contactList->addContact($companyContact01)
+    ->addContact($companyContact02)
+    ->addContact($companyContact03)
+    ->addContact($personContact01)
+    ->addContact($personContact02)
+    ->addContact($personContact03);
+
+////////////// testing ///////////////
+
+$contactList->searchWithKeyword("jov");
+$contactList->displayContact();
