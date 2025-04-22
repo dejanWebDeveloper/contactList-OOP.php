@@ -173,3 +173,67 @@ class PersonContact extends Contact
         }
     }
 }
+/**
+ * Class which include all contact informations and save its in array
+ */
+class ContactList extends Contact
+{
+    /**
+     * define empty array
+     * @var
+     */
+    protected $contacts = [];
+    /**
+     * getter/setter methodes 
+     * @return 
+     */
+    public function getContacts()
+    {
+        return $this->contacts;
+    }
+    /**
+     * add contact one per one
+     * @param Contact $contact
+     * @return static
+     */
+    public function addContact(Contact $contact)
+    {
+        $this->contacts[] = $contact;
+        return $this;
+    }
+    /**
+     * add array of contact
+     * @param mixed $contacts
+     * @return void
+     */
+    public function setContacts($contacts)
+    {
+        $this->contacts = [];
+        foreach ($contacts as $contact) {
+            $this->addContact($contact);
+        }
+    }
+    public function __construct(){
+        $this->contacts = [];
+    }
+    /**
+     * Parent methode searchWithKeyword / override
+     * @param mixed $keyword
+     * @return void
+     */
+    public function searchWithKeyword($keyword){
+        foreach ($this->getContacts() as $contact) {
+            $contact->searchWithKeyword($keyword);
+        }
+    }
+    /**
+     * Parent methode displayContact / override
+     * @return void
+     */
+    public function displayContact()
+    {
+        foreach ($this->getContacts() as $contact) {
+            $contact->displayContact();
+        }
+    }
+}
